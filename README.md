@@ -14,7 +14,7 @@ This project focuses on building a robust NLP pipeline for **IELTS Writing Task 
 
 ## 👨‍💻 Project Members
 
-- **Nakhye Ghanekar**
+- **Trushar Ghanekar**
 - **Riddhesh More**
 - **Prachi Seth**
 
