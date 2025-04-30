@@ -15,10 +15,10 @@ This project focuses on building a robust NLP pipeline for **IELTS Writing Task 
 ## 👨‍💻 Project Members
 
 - **Trushar Ghanekar**
-- **Riddhesh More**
+- **Hoan Vu**
 - **Prachi Sheth**
 
-> We are students of the **MAS** program, collaborating to apply NLP techniques to real-world educational challenges.
+> We are students of the **HBRS** program, collaborating to apply NLP techniques to real-world educational challenges.
 
 ---
 
