@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IELTS Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.5;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+    #question {
+      font-size: 1.2rem;
+      color: #34495e;
+      border-left: 4px solid #2980b9;
+      padding-left: 15px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>IELTS Test</h1>
+  <div id="question">Loading question...</div>
+
+  <script>
+    async function fetchQuestion() {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/generate');
+        const data = await response.json();
+        document.getElementById('question').textContent = data.question || 'No question generated.';
+      } catch (error) {
+        document.getElementById('question').textContent = 'Failed to load question.';
+        console.error('Error fetching question:', error);
+      }
+    }
+
+    // Fetch question on page load
+    fetchQuestion();
+  </script>
+</body>
+</html>
