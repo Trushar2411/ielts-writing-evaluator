@@ -1,12 +1,3 @@
-Here’s the full `README.md` in proper **Markdown format** for your IELTS Question Generator project:
-
-````markdown
-# 🧠 IELTS Question Generator – GPT-2 Based
-
-This project generates IELTS-style essay questions using a fine-tuned GPT-2 language model. It includes data preparation, model fine-tuning, an API using FastAPI, and a simple HTML interface to view generated questions.
-
----
-
 ## 📁 Project Workflow Overview
 
 ### 1. Dataset Preparation
