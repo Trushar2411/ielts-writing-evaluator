@@ -18,4 +18,20 @@ Future enhancements may include deploying the model via a web interface, and exp
 
 This project demonstrates how modern NLP techniques can be used in real-world educational contexts to automate assessment and guide student improvement in a personalized and scalable manner.
 
+## Model Performance
 
+Regression Results
+
+The regression model showed consistent improvement over training steps, with training loss decreasing from 28.39 at step 10 to 0.44 at step 240. This significant drop indicates that the model learned to approximate the score distribution effectively. Final performance on the test set was evaluated using:
+
+    Mean Squared Error (MSE): 0.643
+
+    Mean Absolute Error (MAE): 0.650
+
+These values suggest that the model, on average, predicted scores within approximately ±0.65 of the true band. For a high-stakes context like IELTS, this level of error is reasonably low and provides a reliable continuous scoring mechanism.
+
+Classification Results
+
+The classification model aimed to simplify the output by grouping essays into predefined band categories. Training loss reduced from 1.52 to 0.68, with an average training loss of 1.02 by the final epoch. The loss curve showed stable convergence with occasional fluctuations, suggesting general learning with some class-specific variance.
+
+Qualitative inspection of predictions shows the model performs well in assigning essays to appropriate band levels, particularly distinguishing lower bands. Integration with a feedback generator further enhances interpretability by providing writing tips along with predicted bands.
