@@ -72,35 +72,3 @@ datasets
 fastapi
 uvicorn
 ```
-
-You can create a `requirements.txt` file with the above and install using:
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## 🚀 Future Improvements
-
-* Deploy the app online (e.g., Render, Hugging Face Spaces)
-* Add input prompts for topic-controlled generation
-* Collect user feedback or allow saving questions
-* Add logging or analytics to track usage
-
----
-
-## 📌 Project Structure
-
-```
-Question Generation/
-├── cleaned_ielts_questions.csv
-├── cleaned_ielts_questions.txt
-├── fine_tune.py
-├── api.py
-├── ielts_model/
-└── index.html
-```
-
-
-```
