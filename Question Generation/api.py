@@ -5,12 +5,16 @@ import torch
 
 app = FastAPI()
 
-model_name_or_path = "./ielts_model"  # your fine-tuned model folder
-
+# Load model and tokenizer
+model_name_or_path = "./ielts_model"  # Path to your fine-tuned model
 tokenizer = GPT2Tokenizer.from_pretrained(model_name_or_path)
+tokenizer.pad_token = tokenizer.eos_token  # Set pad token
 model = GPT2LMHeadModel.from_pretrained(model_name_or_path)
+model.eval()  # Set model to evaluation mode
 
-tokenizer.pad_token = tokenizer.eos_token  # for GPT-2
+# Use GPU if available
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model.to(device)
 
 @app.get("/", response_class=HTMLResponse)
 def home():
@@ -20,7 +24,7 @@ def home():
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>IELTS Test</title>
+      <title>IELTS Question Generator</title>
       <style>
         body {
           font-family: Arial, sans-serif;
@@ -28,6 +32,7 @@ def home():
           margin: 40px auto;
           padding: 0 20px;
           line-height: 1.5;
+          background-color: #f9f9f9;
         }
         h1 {
           text-align: center;
@@ -40,6 +45,9 @@ def home():
           border-left: 4px solid #2980b9;
           padding-left: 15px;
           margin-bottom: 20px;
+          background: #fff;
+          padding: 15px;
+          border-radius: 5px;
         }
         button {
           background-color: #2980b9;
@@ -49,6 +57,8 @@ def home():
           font-size: 1rem;
           cursor: pointer;
           border-radius: 5px;
+          display: block;
+          margin: auto;
         }
         button:hover {
           background-color: #1c5980;
@@ -56,7 +66,7 @@ def home():
       </style>
     </head>
     <body>
-      <h1>IELTS Test</h1>
+      <h1>IELTS Question Generator</h1>
       <div id="question">Loading question...</div>
       <button onclick="fetchQuestion()">Generate New Question</button>
 
@@ -73,7 +83,7 @@ def home():
             console.error('Error fetching question:', error);
           }
         }
-        // Fetch question on page load
+        // Fetch a question when the page loads
         fetchQuestion();
       </script>
     </body>
@@ -84,20 +94,23 @@ def home():
 @app.get("/generate")
 def generate_question():
     prompt = "IELTS question:"
-    inputs = tokenizer(prompt, return_tensors="pt")
+    inputs = tokenizer(prompt, return_tensors="pt").to(device)
 
-    outputs = model.generate(
-        inputs["input_ids"],
-        attention_mask=inputs["attention_mask"],
-        pad_token_id=tokenizer.eos_token_id,
-        max_length=60,
-        do_sample=True,
-        top_p=0.95,
-        top_k=50,
-        temperature=0.8,
-        num_return_sequences=1,
-        eos_token_id=tokenizer.eos_token_id,
-    )
+    with torch.no_grad():
+        outputs = model.generate(
+            input_ids=inputs["input_ids"],
+            attention_mask=inputs["attention_mask"],
+            max_length=80,
+            do_sample=True,
+            temperature=0.9,
+            top_k=50,
+            top_p=0.95,
+            repetition_penalty=1.2,
+            no_repeat_ngram_size=3,
+            pad_token_id=tokenizer.eos_token_id,
+            eos_token_id=tokenizer.eos_token_id,
+            num_return_sequences=1,
+        )
 
     generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
     question = generated_text[len(prompt):].strip()
