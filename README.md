@@ -37,17 +37,17 @@ This dataset includes:
 
 ## ✅ Project Phases
 
-### 1. Data Preprocessing (🛠️ Current Phase)
+### 1. Data Preprocessing 
 - Load and inspect the dataset
 - Filter out incomplete or low-quality entries
 - Clean essay text (remove special characters, normalize casing, etc.)
 - Prepare structured input for downstream modeling
 
-### 2. Question Generation (🧠 Upcoming)
+### 2. Question Generation 
 - Use NLP/Transformer models (e.g. GPT) to generate new IELTS-style Task 2 questions
 - Train on real prompts extracted from the dataset
 
-### 3. Essay Grading (📊 Future Work)
+### 3. Essay Grading 
 - Build a grading model to evaluate user-generated essays
 - Predict band scores based on trained scoring metrics
 
