@@ -35,3 +35,19 @@ Classification Results
 The classification model aimed to simplify the output by grouping essays into predefined band categories. Training loss reduced from 1.52 to 0.68, with an average training loss of 1.02 by the final epoch. The loss curve showed stable convergence with occasional fluctuations, suggesting general learning with some class-specific variance.
 
 Qualitative inspection of predictions shows the model performs well in assigning essays to appropriate band levels, particularly distinguishing lower bands. Integration with a feedback generator further enhances interpretability by providing writing tips along with predicted bands.
+
+## Notebook Visibility Note
+
+⚠️ **Important**: The Jupyter notebook in this repository may not be visible on GitHub due to the following error:  
+`There was an error rendering your Notebook: the 'state' key is missing from 'metadata.widgets'. Add 'state' to each, or remove 'metadata.widgets'.`
+
+However, you can still:
+1. Download the notebook file directly
+2. Use it on Google Colab (recommended for full functionality)
+
+## Usage Instructions
+
+1. **Google Colab Requirement**: This notebook is designed to run on Google Colab due to Hugging Face Trainer dependencies
+2. **Manual File Setup**: Before running the notebook each time:
+   - You need to manually upload the `filter_dataset.csv` file
+   - Place it in the appropriate directory as referenced in the notebook
